@@ -23,5 +23,14 @@ jobs:
     - uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
-    - name: build docker image
-      run: make build
+    - name: build and tag container image
+      run: |
+        make build
+        docker tag flan_scan:latest berndonline/flan:latest
+
+    - name: push container image
+      run: |
+        docker login -u berndonline -p "${REGISTRY_TOKEN}"
+        docker push berndonline/flan:latest
+      env:
+        REGISTRY_TOKEN: ${{ secrets.docker_token }}
