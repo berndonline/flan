@@ -45,13 +45,7 @@ spec:
                value: aws
              - name: bucket
                value: https://hostgate-cluster-1.fra1.digitaloceanspaces.com/
-             - name: AWS_ACCESS_KEY_ID
-               valueFrom:
-                 secretKeyRef:
+             - name: cloud-creds
+               envFrom:
+               - secretRef:
                    name: cloud-creds
-                   key: access
-             - name: AWS_SECRET_ACCESS_KEY
-               valueFrom:
-                 secretKeyRef:
-                   name: cloud-creds
-                   key: secret
