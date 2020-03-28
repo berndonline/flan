@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: flan-scan-deployment
+    namespace: flan
     labels:
         app: flan-scan
 spec:
@@ -15,25 +16,42 @@ spec:
                app: flan-scan
        spec:
            volumes:
-           - name: cloud-key
-             secret:
-               secretName: cloud-key
+           # - emptyDir:
+           #   name: shared
            - name: shared-files
              configMap:
                 name: shared-files
+                items:
+                - key: ips.txt
+                  path: ips.txt
+           # securityContext:
+           #   privileged: true
            containers:
            - name: flan-scan-svc
-             image: <REFERENCE TO REGISTRY FOR CONTAINER>
-             imagePullPolicy: IfNotPresent
+             image: berndonline/flan:latest
+             imagePullPolicy: Always
              volumeMounts:
-             - name: cloud-key
-               mountPath: /var/secrets/google
+             # - name: shared
+             #   mountPath: /shared
              - name: shared-files
-               mountPath: /shared
+               mountPath: /shared/ips.txt
+               subPath: ips.txt
              env:
-             - name: upload
-               value: <GCP_OR_AWS>
-             - name: bucket
-               value: <BUCKET_NAME>
              - name: format
-               value: <REPORT_FORMAT>
+               value: html
+             - name: clustername
+               value: cluster-1
+             - name: upload
+               value: aws
+             - name: bucket
+               value: https://hostgate-cluster-1.fra1.digitaloceanspaces.com/
+             - name: AWS_ACCESS_KEY_ID
+               valueFrom:
+                 secretKeyRef:
+                   name: cloud-creds
+                   key: access
+             - name: AWS_SECRET_ACCESS_KEY
+               valueFrom:
+                 secretKeyRef:
+                   name: cloud-creds
+                   key: secret

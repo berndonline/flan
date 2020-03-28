@@ -1,5 +1,4 @@
 #!/bin/sh
-
 current_time=$(date "+%Y.%m.%d-%H.%M")
 if [[ -z $upload ]]
 then
@@ -11,15 +10,19 @@ else
 fi
 
 report_extension="tex"
+cluster="default"
 
 if [[ ! -z $format ]]
 then
     report_extension=$format
 fi
+if [[ ! -z $clustername ]]
+then
+    cluster=$clustername
+fi
 
-xml_dir=xml_files/$current_time
-report_file=reports/report_$current_time.$report_extension
-
+xml_dir=xml_files/$cluster-$current_time
+report_file=reports/report_$cluster-$current_time.$report_extension
 function upload {
     if [[ -z $upload ]]
     then
@@ -54,4 +57,5 @@ then
     sed -i 's/#/\\#/g' $root_dir$report_file
     sed -i 's/%/\\%/g' $root_dir$report_file
 fi
+
 upload $report_file
