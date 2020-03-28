@@ -40,7 +40,7 @@ spec:
              - name: format
                value: html
              - name: clustername
-               value: cluster-1
+               value: <-cluster-name->
              - name: upload
                value: aws
              - name: bucket
