@@ -45,6 +45,6 @@ spec:
                value: aws
              - name: bucket
                value: https://hostgate-cluster-1.fra1.digitaloceanspaces.com/
-             - envFrom:
-               - secretRef:
-                   name: cloud-creds
+             envFrom:
+             - secretRef:
+                 name: cloud-creds
