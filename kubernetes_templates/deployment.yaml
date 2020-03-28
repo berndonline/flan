@@ -44,7 +44,7 @@ spec:
              - name: upload
                value: aws
              - name: bucket
-               value: https://hostgate-cluster-1.fra1.digitaloceanspaces.com/
+               value: <-name->
              envFrom:
              - secretRef:
                  name: cloud-creds
