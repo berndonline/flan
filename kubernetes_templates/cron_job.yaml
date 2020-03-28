@@ -33,9 +33,13 @@ spec:
                  - name: clustername
                    value: <-cluster-name->
                  - name: upload
-                   value: aws
+                   value: do
                  - name: bucket
                    value: <-name->
+                 - name: region
+                   value: <-region->
+                 - name: s3url
+                   value: <-s3url->
                  envFrom:
                  - secretRef:
                      name: cloud-creds

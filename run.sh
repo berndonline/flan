@@ -30,6 +30,9 @@ function upload {
     elif [ $upload = "aws" ]
     then
         python /aws_push.py $1
+    elif [ $upload = "do" ]
+    then
+        python /do_push.py $1
     elif [ $upload = "gcp" ]
     then
         python /gcp_push.py $1
