@@ -1,3 +1,5 @@
+![container build](https://github.com/berndonline/flan/workflows/container%20build/badge.svg)
+
 <img src="https://cfsecuritycdn.infosec.workers.dev/img/flan_scan.png"/>
 
 Flan Scan is a lightweight network vulnerability scanner. With Flan Scan you can easily find open ports on your network, identify services and their version, and get a list of relevant CVEs affecting your network.
